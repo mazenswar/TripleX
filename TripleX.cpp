@@ -1,16 +1,19 @@
 #include <iostream>
-
+#include <ctime>
 void PrintIntroduction(int Diffculty)
 {
-    std::cout << "You are a secret agent breaking into a secure server room... \n";
-    std::cout << "Enter the correct code to continue \n";
+    if (Diffculty == 1)
+    {
+        std::cout << "\n You are a secret agent breaking into a secure server room... \n";
+        std::cout << "\n Enter the correct code to continue \n";
+    }
 }
 bool PlayGame(int Difficulty)
 {
     PrintIntroduction(Difficulty);
-    const int CodeA = 4;
-    const int CodeB = 3;
-    const int CodeC = 2;
+    const int CodeA = rand() % Difficulty + Difficulty;
+    const int CodeB = rand() % Difficulty + Difficulty;
+    const int CodeC = rand() % Difficulty + Difficulty;
     const int CodeSum = CodeA + CodeB + CodeC;
     const int CodeProduct = CodeA * CodeB * CodeC;
     //
@@ -28,22 +31,22 @@ bool PlayGame(int Difficulty)
 
     int GuessSum = GuessA + GuessB + GuessC;
     int GuessProduct = GuessA * GuessB * GuessC;
-    std::cout << "\n You entered: " << GuessA << GuessB << GuessC;
+    std::cout << "\n \n You entered: " << GuessA << GuessB << GuessC;
     if (GuessSum == CodeSum && CodeProduct == GuessProduct)
     {
-        std::cout << "\n You Win!";
+        std::cout << "\n \n  Well done agent, you have extracted a file, keep going!" << std::endl;
         return true;
     }
     else
     {
-        std::cout << "\n Loooooose";
+        std::cout << "\n \n You entered the wrong code! Careful agent! Try again!" << std::endl;
         return false;
     }
 }
 
 int main()
 {
-
+    srand(time(NULL));
     int const MaxDifficulty = 5;
     int Difficulty = 1;
     while (Difficulty <= MaxDifficulty)
